@@ -19,7 +19,7 @@ class _MainHomePageState extends State<MainHomePage> {
         children: [
           Container(
             child: Container(
-              margin: EdgeInsets.only(top: 30, bottom: 15),
+              margin: EdgeInsets.only(top: 40, bottom: 15),
               padding: EdgeInsets.only(left: 20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

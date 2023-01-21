@@ -14,7 +14,7 @@ class MainHomePageBody extends StatefulWidget {
 class _MainHomePageBodyState extends State<MainHomePageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   double _currentPageValue = 0.0;
-  double _scaleFactor = 0.8;
+  double _scaleFactor = 1.0;
   double _height = 220;
 
   @override
@@ -23,6 +23,9 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
     pageController.addListener(() {
       setState(() {
         _currentPageValue = pageController.page!;
+
+        /// TODO: It's debug print
+        // debugPrint('current page value:$_currentPageValue');
       });
     });
   }
@@ -49,18 +52,31 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
   Widget _buildPageItem(context, int index) {
     Matrix4 matrix = Matrix4.identity();
     if (index == _currentPageValue.floor()) {
-      double currentScale =
-          1 - (_currentPageValue - index) * (1 - _scaleFactor);
-      double currentTransformation = _height * (1 - currentScale) / 2;
+      var currentScale = 1 - (_currentPageValue - index) * (1 - _scaleFactor);
+      var currentTransformation = _height * (1 - currentScale) / 2;
       matrix = Matrix4.diagonal3Values(1, currentScale, 1)
         ..setTranslationRaw(0, currentTransformation, 0);
+
+      /// TODO: It's debug print
+      debugPrint('CURRENT SCALE:$currentScale');
+      // debugPrint(currentTransformation.toString());
     } else if (index == _currentPageValue.floor() + 1) {
-      double currentScale =
-          _scaleFactor + (_currentPageValue - index) * (1 - _scaleFactor);
-      double currentTransformation = _height * (1 - currentScale) / 2;
+      var currentScale =
+          _scaleFactor + (_currentPageValue - index + 1) * (1 - _scaleFactor);
+      var currentTransformation = _height * (1 - currentScale) / 2;
       matrix = Matrix4.diagonal3Values(1, currentScale, 1);
       matrix = Matrix4.diagonal3Values(1, currentScale, 1)
         ..setTranslationRaw(0, currentTransformation, 0);
+    } else if (index == _currentPageValue.floor() - 1) {
+      var currentScale = 1 - (_currentPageValue - index) * (1 - _scaleFactor);
+      var currentTransformation = _height * (1 - currentScale) / 2;
+      matrix = Matrix4.diagonal3Values(1, currentScale, 1);
+      matrix = Matrix4.diagonal3Values(1, currentScale, 1)
+        ..setTranslationRaw(0, currentTransformation, 0);
+    } else {
+      var currentScale = 0.8;
+      matrix = Matrix4.diagonal3Values(1, currentScale, 1)
+        ..setTranslationRaw(0, _height * (1 - _scaleFactor)/2, 1);
     }
 
     return Transform(
