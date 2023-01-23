@@ -1,5 +1,7 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/utils/colors_util.dart';
+import 'package:flutter_ecommerce_app/utils/dimensions.dart';
 import 'package:flutter_ecommerce_app/widgets/big_text_widget.dart';
 import 'package:flutter_ecommerce_app/widgets/icon_and_text_widget.dart';
 import 'package:flutter_ecommerce_app/widgets/small_text_widget.dart';
@@ -15,7 +17,7 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   double _currentPageValue = 0.0;
   double _scaleFactor = 0.8;
-  double _height = 220;
+  double _height = Dimensions.pageViewContainer;
 
   @override
   void initState() {
@@ -38,17 +40,32 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 320,
-      child: PageView.builder(
-          controller: pageController,
-          itemCount: 5,
-          itemBuilder: (context, position) {
-            return _buildPageItem(context, position);
-          }),
+    return Column(
+      children: [
+        Container(
+          height: Dimensions.pageView,
+          child: PageView.builder(
+              controller: pageController,
+              itemCount: 5,
+              itemBuilder: (context, position) {
+                return _buildPageItem(context, position);
+              }),
+        ),
+        DotsIndicator(
+          dotsCount: 5,
+          position: _currentPageValue,
+          decorator: DotsDecorator(
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+          ),
+        )
+      ],
     );
   }
 
+  /// Carousel
   Widget _buildPageItem(context, int index) {
     Matrix4 matrix = Matrix4.identity();
     if (index == _currentPageValue.floor()) {
@@ -76,14 +93,14 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
     } else {
       var currentScale = 0.8;
       matrix = Matrix4.diagonal3Values(1, currentScale, 1)
-        ..setTranslationRaw(0, _height * (1 - _scaleFactor)/2, 1);
+        ..setTranslationRaw(0, _height * (1 - _scaleFactor) / 2, 1);
     }
 
     return Transform(
       transform: matrix,
       child: Stack(children: [
         Container(
-          height: 220,
+          height: Dimensions.pageViewContainer,
           margin: EdgeInsets.only(left: 10, right: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
@@ -100,21 +117,34 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: 150,
+            height: Dimensions.pageViewTextContainer,
             margin: EdgeInsets.only(left: 30, right: 30, bottom: 30),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: Theme.of(context).colorScheme.onBackground,
-            ),
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).colorScheme.onBackground,
+                boxShadow: [
+                  BoxShadow(
+                      color:
+                          Theme.of(context).colorScheme.shadow.withOpacity(0.2),
+                      blurRadius: 5.0,
+                      offset: Offset(0, 5)),
+                  BoxShadow(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      offset: Offset(-5, 0)),
+                  BoxShadow(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      offset: Offset(5, 0))
+                ]),
             child: Container(
-              padding: EdgeInsets.only(top: 15, right: 15, left: 15),
+              padding: EdgeInsets.only(top: Dimensions.height15, right: Dimensions.height15, left: Dimensions.height15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BigText(text: 'Pizza ${index + 1}'),
                   SizedBox(
-                    height: 10,
+                    height: Dimensions.height10,
                   ),
+                  /// Comment section
                   Row(
                     children: [
                       Wrap(
@@ -141,9 +171,11 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: Dimensions.height10*2,
                   ),
+                  /// Time and distance
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconAndTextWidget(
                           icondata: Icons.circle_rounded,

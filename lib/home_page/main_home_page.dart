@@ -17,6 +17,7 @@ class _MainHomePageState extends State<MainHomePage> {
     return Scaffold(
       body: Column(
         children: [
+          /// Header
           Container(
             child: Container(
               margin: EdgeInsets.only(top: 40, bottom: 15),
@@ -53,6 +54,7 @@ class _MainHomePageState extends State<MainHomePage> {
               ),
             ),
           ),
+          /// Body
           MainHomePageBody(),
         ],
       ),
