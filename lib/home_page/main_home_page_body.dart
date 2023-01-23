@@ -14,7 +14,7 @@ class MainHomePageBody extends StatefulWidget {
 class _MainHomePageBodyState extends State<MainHomePageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   double _currentPageValue = 0.0;
-  double _scaleFactor = 1.0;
+  double _scaleFactor = 0.8;
   double _height = 220;
 
   @override
@@ -58,7 +58,7 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
         ..setTranslationRaw(0, currentTransformation, 0);
 
       /// TODO: It's debug print
-      debugPrint('CURRENT SCALE:$currentScale');
+      // debugPrint('CURRENT SCALE:$currentScale');
       // debugPrint(currentTransformation.toString());
     } else if (index == _currentPageValue.floor() + 1) {
       var currentScale =
