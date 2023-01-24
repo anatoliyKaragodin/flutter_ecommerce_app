@@ -42,6 +42,7 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        /// Carousel section
         Container(
           height: Dimensions.pageView,
           child: PageView.builder(
@@ -51,15 +52,94 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
                 return _buildPageItem(context, position);
               }),
         ),
+
+        /// Dots
         DotsIndicator(
           dotsCount: 5,
           position: _currentPageValue,
           decorator: DotsDecorator(
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
+            size: Size.square(Dimensions.iconSize10 * 0.9),
+            activeSize:
+                Size(Dimensions.iconSize10 * 1.8, Dimensions.iconSize10 * 0.9),
             activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
+                borderRadius: BorderRadius.circular(Dimensions.radius20 / 4)),
           ),
+        ),
+
+        /// Popular text
+        SizedBox(height: Dimensions.height10 * 3),
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.height10 * 3),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(text: 'Popular'),
+              SizedBox(height: Dimensions.height10),
+              Container(
+                margin: EdgeInsets.only(
+                    left: Dimensions.height10 / 2,
+                    right: Dimensions.height10 / 2,
+                    bottom: Dimensions.height10 * 0.3),
+                child: BigText(
+                    text: '.', color: Theme.of(context).colorScheme.onSurface),
+              ),
+              SizedBox(height: Dimensions.height10),
+              Container(
+                margin: EdgeInsets.only(bottom: Dimensions.height10 * 0.3),
+                child: SmallText(text: 'Pizza paring'),
+              )
+            ],
+          ),
+        ),
+
+        /// List of food and images
+        Container(
+          height: 900,
+          child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  margin: EdgeInsets.only(
+                      left: Dimensions.height10 * 2,
+                      right: Dimensions.height10 * 2,
+                  bottom: Dimensions.height10
+                  ),
+                  child: Row(
+                    children: [
+                      /// Image section
+                      Container(
+                        width: 120,
+                        height: 120,
+                        decoration: BoxDecoration(
+
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius20),
+                            color: Theme.of(context).colorScheme.onBackground,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                                image: AssetImage(
+                                    'assets/images/pizza${index + 1}.jpg'))),
+                      ),
+                      /// Text container
+                      Expanded(
+                        child: Container(
+                          height: 100,
+
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(Dimensions.radius20),
+                              bottomRight: Radius.circular(Dimensions.radius20)
+                            ),
+                            color: Theme.of(context).colorScheme.onBackground
+                          ),
+
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }),
         )
       ],
     );
@@ -101,9 +181,10 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
       child: Stack(children: [
         Container(
           height: Dimensions.pageViewContainer,
-          margin: EdgeInsets.only(left: 10, right: 10),
+          margin: EdgeInsets.only(
+              left: Dimensions.height10, right: Dimensions.height10),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(Dimensions.radius20 * 1.5),
               color: index.isEven
                   ? Theme.of(context).colorScheme.secondaryContainer
                   : Theme.of(context)
@@ -118,25 +199,31 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
           alignment: Alignment.bottomCenter,
           child: Container(
             height: Dimensions.pageViewTextContainer,
-            margin: EdgeInsets.only(left: 30, right: 30, bottom: 30),
+            margin: EdgeInsets.only(
+                left: Dimensions.height15 * 2,
+                right: Dimensions.height15 * 2,
+                bottom: Dimensions.height15 * 2),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
                 color: Theme.of(context).colorScheme.onBackground,
                 boxShadow: [
                   BoxShadow(
                       color:
                           Theme.of(context).colorScheme.shadow.withOpacity(0.2),
-                      blurRadius: 5.0,
+                      blurRadius: Dimensions.radius20 / 4,
                       offset: Offset(0, 5)),
                   BoxShadow(
                       color: Theme.of(context).colorScheme.onBackground,
-                      offset: Offset(-5, 0)),
+                      offset: Offset(-Dimensions.height10 / 2, 0)),
                   BoxShadow(
                       color: Theme.of(context).colorScheme.onBackground,
-                      offset: Offset(5, 0))
+                      offset: Offset(Dimensions.height10 / 2, 0))
                 ]),
             child: Container(
-              padding: EdgeInsets.only(top: Dimensions.height15, right: Dimensions.height15, left: Dimensions.height15),
+              padding: EdgeInsets.only(
+                  top: Dimensions.height15,
+                  right: Dimensions.height15,
+                  left: Dimensions.height15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -144,6 +231,7 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
                   SizedBox(
                     height: Dimensions.height10,
                   ),
+
                   /// Comment section
                   Row(
                     children: [
@@ -153,40 +241,41 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
                             (index) => Icon(
                                   Icons.star,
                                   color: Theme.of(context).colorScheme.primary,
-                                  size: 15,
+                                  size: Dimensions.iconSize10 * 1.5,
                                 )),
                       ),
                       SizedBox(
-                        width: 10,
+                        width: Dimensions.height10,
                       ),
                       SmallText(text: '4.5'),
                       SizedBox(
-                        width: 10,
+                        width: Dimensions.height10,
                       ),
                       SmallText(text: '1287'),
                       SizedBox(
-                        width: 10,
+                        width: Dimensions.height10,
                       ),
                       SmallText(text: 'comments')
                     ],
                   ),
                   SizedBox(
-                    height: Dimensions.height10*2,
+                    height: Dimensions.height10 * 2,
                   ),
+
                   /// Time and distance
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconAndTextWidget(
-                          icondata: Icons.circle_rounded,
+                          iconData: Icons.circle_rounded,
                           text: 'Normal',
                           iconColor: ColorsUtil.iconColor1),
                       IconAndTextWidget(
-                          icondata: Icons.location_on,
+                          iconData: Icons.location_on,
                           text: '1.7 km',
                           iconColor: ColorsUtil.iconColor2),
                       IconAndTextWidget(
-                          icondata: Icons.access_time_rounded,
+                          iconData: Icons.access_time_rounded,
                           text: '32 min',
                           iconColor: ColorsUtil.iconColor3),
                     ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/home_page/main_home_page_body.dart';
+import 'package:flutter_ecommerce_app/utils/dimensions.dart';
 import 'package:flutter_ecommerce_app/widgets/big_text_widget.dart';
 import 'package:flutter_ecommerce_app/widgets/small_text_widget.dart';
 
@@ -11,7 +12,6 @@ class MainHomePage extends StatefulWidget {
 }
 
 class _MainHomePageState extends State<MainHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,8 +20,11 @@ class _MainHomePageState extends State<MainHomePage> {
           /// Header
           Container(
             child: Container(
-              margin: EdgeInsets.only(top: 40, bottom: 15),
-              padding: EdgeInsets.only(left: 20, right: 20),
+              margin: EdgeInsets.only(
+                  top: Dimensions.height10 * 4, bottom: Dimensions.height15),
+              padding: EdgeInsets.only(
+                  left: Dimensions.height10 * 2,
+                  right: Dimensions.height10 * 2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -33,20 +36,26 @@ class _MainHomePageState extends State<MainHomePage> {
                       ),
                       Row(
                         children: [
-                          SmallText(text: 'Moscow',
-                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),),
-                        Icon(Icons.arrow_drop_down_rounded)
+                          SmallText(
+                            text: 'Moscow',
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSurface
+                                .withOpacity(0.5),
+                          ),
+                          Icon(Icons.arrow_drop_down_rounded)
                         ],
                       )
                     ],
                   ),
                   Center(
                     child: Container(
-                      width: 45,
-                      height: 45,
+                      width: Dimensions.height15 * 3,
+                      height: Dimensions.height15 * 3,
                       child: Icon(Icons.search, color: Colors.white),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20 - 5),
                           color: Theme.of(context).primaryColor),
                     ),
                   )
@@ -54,8 +63,9 @@ class _MainHomePageState extends State<MainHomePage> {
               ),
             ),
           ),
+
           /// Body
-          MainHomePageBody(),
+          Expanded(child: SingleChildScrollView(child: MainHomePageBody())),
         ],
       ),
     );
