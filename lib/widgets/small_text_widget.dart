@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../utils/dimensions.dart';
+import 'package:flutter_ecommerce_app/widgets/library/widgets_library.dart';
 
 class SmallText extends StatelessWidget {
   Color? color;
@@ -8,11 +6,14 @@ class SmallText extends StatelessWidget {
   double size;
   double height;
 
+  TextOverflow overflow;
+
+
   SmallText(
       {Key? key,
       this.color = Colors.black38,
-      required this.text,
-      this.size = 12,
+      required this.text, this.overflow = TextOverflow.ellipsis,
+      this.size = 0,
       this.height = 1.2})
       : super(key: key);
 
@@ -20,6 +21,7 @@ class SmallText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      overflow: overflow,
       style: TextStyle(
           color: color,
           fontFamily: 'Roboto',

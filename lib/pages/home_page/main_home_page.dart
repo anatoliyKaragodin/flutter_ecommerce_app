@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/home_page/main_home_page_body.dart';
-import 'package:flutter_ecommerce_app/utils/dimensions.dart';
-import 'package:flutter_ecommerce_app/widgets/big_text_widget.dart';
-import 'package:flutter_ecommerce_app/widgets/small_text_widget.dart';
+import 'library/home_page_library.dart';
 
 class MainHomePage extends StatefulWidget {
   const MainHomePage({Key? key}) : super(key: key);
@@ -23,8 +19,8 @@ class _MainHomePageState extends State<MainHomePage> {
               margin: EdgeInsets.only(
                   top: Dimensions.height10 * 4, bottom: Dimensions.height15),
               padding: EdgeInsets.only(
-                  left: Dimensions.height10 * 2,
-                  right: Dimensions.height10 * 2),
+                  left: Dimensions.width10 * 2,
+                  right: Dimensions.width10 * 2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -50,7 +46,7 @@ class _MainHomePageState extends State<MainHomePage> {
                   ),
                   Center(
                     child: Container(
-                      width: Dimensions.height15 * 3,
+                      width: Dimensions.width10 * 4.5,
                       height: Dimensions.height15 * 3,
                       child: Icon(Icons.search, color: Colors.white),
                       decoration: BoxDecoration(

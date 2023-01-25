@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/utils/dimensions.dart';
-import 'package:flutter_ecommerce_app/widgets/small_text_widget.dart';
+import 'package:flutter_ecommerce_app/widgets/library/widgets_library.dart';
 
 class IconAndTextWidget extends StatelessWidget {
   final IconData iconData;

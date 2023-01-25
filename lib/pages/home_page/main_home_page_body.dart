@@ -1,10 +1,4 @@
-import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/utils/colors_util.dart';
-import 'package:flutter_ecommerce_app/utils/dimensions.dart';
-import 'package:flutter_ecommerce_app/widgets/big_text_widget.dart';
-import 'package:flutter_ecommerce_app/widgets/icon_and_text_widget.dart';
-import 'package:flutter_ecommerce_app/widgets/small_text_widget.dart';
+import 'library/home_page_library.dart';
 
 class MainHomePageBody extends StatefulWidget {
   const MainHomePageBody({Key? key}) : super(key: key);
@@ -40,6 +34,9 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
 
   @override
   Widget build(BuildContext context) {
+    /// Print screen height and width
+    // debugPrint(Dimensions.screenHeight.toString());
+    // debugPrint(Dimensions.screenWidth.toString());
     return Column(
       children: [
         /// Carousel section
@@ -47,15 +44,15 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
           height: Dimensions.pageView,
           child: PageView.builder(
               controller: pageController,
-              itemCount: 5,
+              itemCount: 8,
               itemBuilder: (context, position) {
                 return _buildPageItem(context, position);
               }),
         ),
 
-        /// Dots
+        /// Dots indicator
         DotsIndicator(
-          dotsCount: 5,
+          dotsCount: 8,
           position: _currentPageValue,
           decorator: DotsDecorator(
             size: Size.square(Dimensions.iconSize10 * 0.9),
@@ -69,7 +66,7 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
         /// Popular text
         SizedBox(height: Dimensions.height10 * 3),
         Container(
-          margin: EdgeInsets.only(left: Dimensions.height10 * 3),
+          margin: EdgeInsets.only(left: Dimensions.width10 * 3),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -77,8 +74,8 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
               SizedBox(height: Dimensions.height10),
               Container(
                 margin: EdgeInsets.only(
-                    left: Dimensions.height10 / 2,
-                    right: Dimensions.height10 / 2,
+                    left: Dimensions.width10 / 2,
+                    right: Dimensions.width10 / 2,
                     bottom: Dimensions.height10 * 0.3),
                 child: BigText(
                     text: '.', color: Theme.of(context).colorScheme.onSurface),
@@ -93,54 +90,81 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
         ),
 
         /// List of food and images
-        Container(
-          height: 900,
-          child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 5,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: EdgeInsets.only(
-                      left: Dimensions.height10 * 2,
-                      right: Dimensions.height10 * 2,
-                  bottom: Dimensions.height10
-                  ),
-                  child: Row(
-                    children: [
-                      /// Image section
-                      Container(
-                        width: 120,
-                        height: 120,
-                        decoration: BoxDecoration(
-
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.radius20),
-                            color: Theme.of(context).colorScheme.onBackground,
-                            image: DecorationImage(
+        ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 8,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                margin: EdgeInsets.only(
+                    left: Dimensions.width10 * 2,
+                    right: Dimensions.width10 * 2,
+                    bottom: Dimensions.height10),
+                child: Row(
+                  children: [
+                    /// Image section
+                    Container(
+                      width: Dimensions.width10*10,
+                      height: Dimensions.width10*10,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20),
+                          color: Theme.of(context).colorScheme.onBackground,
+                          image: DecorationImage(
                               fit: BoxFit.cover,
-                                image: AssetImage(
-                                    'assets/images/pizza${index + 1}.jpg'))),
-                      ),
-                      /// Text container
-                      Expanded(
-                        child: Container(
-                          height: 100,
+                              image: AssetImage(
+                                  'assets/images/pizza${index + 1}.jpg'))),
+                    ),
 
-                          decoration: BoxDecoration(
+                    /// Text container
+                    Expanded(
+                      child: Container(
+                        height: Dimensions.height10*10,
+                        decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(Dimensions.radius20),
-                              bottomRight: Radius.circular(Dimensions.radius20)
-                            ),
-                            color: Theme.of(context).colorScheme.onBackground
-                          ),
+                                topRight:
+                                    Radius.circular(Dimensions.radius20),
+                                bottomRight:
+                                    Radius.circular(Dimensions.radius20)),
+                            color:
+                                Theme.of(context).colorScheme.onBackground),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              BigText(text: 'Pizza ${index+1}'),
+                              SizedBox(height: Dimensions.height10),
+                              SmallText(text: 'text'),
+                              SizedBox(height: Dimensions.height10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconAndTextWidget(
+                                      iconData: Icons.circle_rounded,
+                                      text: 'Normal',
+                                      iconColor: ColorsUtil.iconColor1),
+                                  IconAndTextWidget(
+                                      iconData: Icons.location_on,
+                                      text: '1.7 km',
+                                      iconColor: ColorsUtil.iconColor2),
+                                  IconAndTextWidget(
+                                      iconData: Icons.access_time_rounded,
+                                      text: '32 min',
+                                      iconColor: ColorsUtil.iconColor3),
+                                ],
+                              )
 
+                            ],
+                          ),
                         ),
-                      )
-                    ],
-                  ),
-                );
-              }),
-        )
+                      ),
+                    )
+                  ],
+                ),
+              );
+            })
       ],
     );
   }
@@ -182,15 +206,15 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
         Container(
           height: Dimensions.pageViewContainer,
           margin: EdgeInsets.only(
-              left: Dimensions.height10, right: Dimensions.height10),
+              left: Dimensions.width10, right: Dimensions.width10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Dimensions.radius20 * 1.5),
-              color: index.isEven
-                  ? Theme.of(context).colorScheme.secondaryContainer
-                  : Theme.of(context)
-                      .colorScheme
-                      .secondaryContainer
-                      .withOpacity(0.5),
+              // color: index.isEven
+              //     ? Theme.of(context).colorScheme.secondaryContainer
+              //     : Theme.of(context)
+              //         .colorScheme
+              //         .secondaryContainer
+              //         .withOpacity(0.5),
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage('assets/images/pizza${index + 1}.jpg'))),
@@ -200,8 +224,8 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
           child: Container(
             height: Dimensions.pageViewTextContainer,
             margin: EdgeInsets.only(
-                left: Dimensions.height15 * 2,
-                right: Dimensions.height15 * 2,
+                left: Dimensions.width10 * 3,
+                right: Dimensions.width10 * 3,
                 bottom: Dimensions.height15 * 2),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
@@ -211,19 +235,19 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
                       color:
                           Theme.of(context).colorScheme.shadow.withOpacity(0.2),
                       blurRadius: Dimensions.radius20 / 4,
-                      offset: Offset(0, 5)),
+                      offset: Offset(0, Dimensions.height10/2)),
                   BoxShadow(
                       color: Theme.of(context).colorScheme.onBackground,
-                      offset: Offset(-Dimensions.height10 / 2, 0)),
+                      offset: Offset(-Dimensions.width10 / 2, 0)),
                   BoxShadow(
                       color: Theme.of(context).colorScheme.onBackground,
-                      offset: Offset(Dimensions.height10 / 2, 0))
+                      offset: Offset(Dimensions.width10 / 2, 0))
                 ]),
             child: Container(
               padding: EdgeInsets.only(
                   top: Dimensions.height15,
-                  right: Dimensions.height15,
-                  left: Dimensions.height15),
+                  right: Dimensions.width10*1.5,
+                  left: Dimensions.width10*1.5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -245,15 +269,15 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
                                 )),
                       ),
                       SizedBox(
-                        width: Dimensions.height10,
+                        width: Dimensions.width10,
                       ),
                       SmallText(text: '4.5'),
                       SizedBox(
-                        width: Dimensions.height10,
+                        width: Dimensions.width10,
                       ),
                       SmallText(text: '1287'),
                       SizedBox(
-                        width: Dimensions.height10,
+                        width: Dimensions.width10,
                       ),
                       SmallText(text: 'comments')
                     ],
