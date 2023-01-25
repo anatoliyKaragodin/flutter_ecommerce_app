@@ -1,4 +1,4 @@
-import 'library/home_page_library.dart';
+import 'package:flutter_ecommerce_app/library/all_library.dart';
 
 class MainHomePage extends StatefulWidget {
   const MainHomePage({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _MainHomePageState extends State<MainHomePage> {
           Container(
             child: Container(
               margin: EdgeInsets.only(
-                  top: Dimensions.height10 * 4, bottom: Dimensions.height15),
+                  top: Dimensions.height10 * 4, bottom: Dimensions.height10*1.5),
               padding: EdgeInsets.only(
                   left: Dimensions.width10 * 2,
                   right: Dimensions.width10 * 2),
@@ -47,7 +47,7 @@ class _MainHomePageState extends State<MainHomePage> {
                   Center(
                     child: Container(
                       width: Dimensions.width10 * 4.5,
-                      height: Dimensions.height15 * 3,
+                      height: Dimensions.height10 * 4.5,
                       child: Icon(Icons.search, color: Colors.white),
                       decoration: BoxDecoration(
                           borderRadius:

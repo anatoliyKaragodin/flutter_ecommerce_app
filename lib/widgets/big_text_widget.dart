@@ -1,4 +1,4 @@
-import 'package:flutter_ecommerce_app/widgets/library/widgets_library.dart';
+import 'package:flutter_ecommerce_app/library/all_library.dart';
 
 class BigText extends StatelessWidget {
   Color? color;
@@ -20,7 +20,7 @@ class BigText extends StatelessWidget {
       maxLines: 1,
       overflow: overflow,
       style: TextStyle(
-        fontSize: size == 0 ? Dimensions.font20 : size,
+        fontSize: size == 0 ? Dimensions.font20*0.8 : size,
           color: color, fontWeight: FontWeight.w400, fontFamily: 'Roboto'),
     );
   }

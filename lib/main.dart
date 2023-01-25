@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/pages/home_page/main_home_page.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:flutter_ecommerce_app/library/all_library.dart';
+import 'package:flutter_ecommerce_app/pages/pizza_page/pizza_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const MainHomePage(),
+      home: const PizzaDetail(),
     );
   }
 }

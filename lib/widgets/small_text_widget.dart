@@ -1,4 +1,4 @@
-import 'package:flutter_ecommerce_app/widgets/library/widgets_library.dart';
+import 'package:flutter_ecommerce_app/library/all_library.dart';
 
 class SmallText extends StatelessWidget {
   Color? color;

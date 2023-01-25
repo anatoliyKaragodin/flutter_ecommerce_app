@@ -1,4 +1,5 @@
-import 'library/home_page_library.dart';
+import 'package:flutter_ecommerce_app/library/all_library.dart';
+import 'package:flutter_ecommerce_app/widgets/app_column.dart';
 
 class MainHomePageBody extends StatefulWidget {
   const MainHomePageBody({Key? key}) : super(key: key);
@@ -35,8 +36,8 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
   @override
   Widget build(BuildContext context) {
     /// Print screen height and width
-    // debugPrint(Dimensions.screenHeight.toString());
-    // debugPrint(Dimensions.screenWidth.toString());
+    debugPrint(Dimensions.screenHeight.toString());
+    debugPrint(Dimensions.screenWidth.toString());
     return Column(
       children: [
         /// Carousel section
@@ -226,7 +227,7 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
             margin: EdgeInsets.only(
                 left: Dimensions.width10 * 3,
                 right: Dimensions.width10 * 3,
-                bottom: Dimensions.height15 * 2),
+                bottom: Dimensions.height10 * 3),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
                 color: Theme.of(context).colorScheme.onBackground,
@@ -245,67 +246,10 @@ class _MainHomePageBodyState extends State<MainHomePageBody> {
                 ]),
             child: Container(
               padding: EdgeInsets.only(
-                  top: Dimensions.height15,
+                  top: Dimensions.height10*1.5,
                   right: Dimensions.width10*1.5,
                   left: Dimensions.width10*1.5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BigText(text: 'Pizza ${index + 1}'),
-                  SizedBox(
-                    height: Dimensions.height10,
-                  ),
-
-                  /// Comment section
-                  Row(
-                    children: [
-                      Wrap(
-                        children: List.generate(
-                            5,
-                            (index) => Icon(
-                                  Icons.star,
-                                  color: Theme.of(context).colorScheme.primary,
-                                  size: Dimensions.iconSize10 * 1.5,
-                                )),
-                      ),
-                      SizedBox(
-                        width: Dimensions.width10,
-                      ),
-                      SmallText(text: '4.5'),
-                      SizedBox(
-                        width: Dimensions.width10,
-                      ),
-                      SmallText(text: '1287'),
-                      SizedBox(
-                        width: Dimensions.width10,
-                      ),
-                      SmallText(text: 'comments')
-                    ],
-                  ),
-                  SizedBox(
-                    height: Dimensions.height10 * 2,
-                  ),
-
-                  /// Time and distance
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconAndTextWidget(
-                          iconData: Icons.circle_rounded,
-                          text: 'Normal',
-                          iconColor: ColorsUtil.iconColor1),
-                      IconAndTextWidget(
-                          iconData: Icons.location_on,
-                          text: '1.7 km',
-                          iconColor: ColorsUtil.iconColor2),
-                      IconAndTextWidget(
-                          iconData: Icons.access_time_rounded,
-                          text: '32 min',
-                          iconColor: ColorsUtil.iconColor3),
-                    ],
-                  )
-                ],
-              ),
+              child: AppColumn(text: 'Pizza 1',),
             ),
           ),
         ),
