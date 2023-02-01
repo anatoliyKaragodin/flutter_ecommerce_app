@@ -1,5 +1,6 @@
 import 'package:flutter_ecommerce_app/library/all_library.dart';
 import 'package:flutter_ecommerce_app/pages/pizza_page/pizza_detail.dart';
+import 'package:flutter_ecommerce_app/pages/pizza_page/recommended_pizza_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +16,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
               theme: ThemeData(
         useMaterial3: true,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
-      home: const PizzaDetail(),
+      home: const RecommendedPizzaDetail(),
     );
   }
 }
